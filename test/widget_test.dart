@@ -47,12 +47,10 @@ void main() {
         'id': 1,
         'userId': 5,
         'title': 'His mother had always taught him',
-        'body': 'His mother had always taught him not to ever think of himself as normal.',
+        'body':
+            'His mother had always taught him not to ever think of himself as normal.',
         'tags': ['history', 'american', 'crime'],
-        'reactions': {
-          'likes': 192,
-          'dislikes': 25,
-        },
+        'reactions': {'likes': 192, 'dislikes': 25},
         'views': 305,
       };
 
@@ -70,11 +68,7 @@ void main() {
         'id': 1,
         'body': 'This is some awesome thinking!',
         'postId': 100,
-        'user': {
-          'id': 63,
-          'username': 'ebrown',
-          'fullName': 'Evan Brown',
-        },
+        'user': {'id': 63, 'username': 'ebrown', 'fullName': 'Evan Brown'},
       };
 
       final comment = CommentModel.fromJson(json);

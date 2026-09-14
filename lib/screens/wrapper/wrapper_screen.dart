@@ -14,9 +14,7 @@ class Wrapper extends StatelessWidget {
         // Loading
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
+            body: Center(child: CircularProgressIndicator()),
           );
         }
 
@@ -28,7 +26,6 @@ class Wrapper extends StatelessWidget {
             }
           });
         }
-
         // Logged out
         else {
           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -38,11 +35,7 @@ class Wrapper extends StatelessWidget {
           });
         }
 
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
+        return const Scaffold(body: Center(child: CircularProgressIndicator()));
       },
     );
   }

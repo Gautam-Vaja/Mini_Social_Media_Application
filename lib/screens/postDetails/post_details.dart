@@ -103,7 +103,10 @@ class _PostDetailsState extends State<PostDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   child: Row(
                     children: [
                       CircleAvatar(
@@ -126,7 +129,10 @@ class _PostDetailsState extends State<PostDetails> {
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.more_vert, color: colorScheme.onSurface),
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                     ],
                   ),
@@ -163,7 +169,10 @@ class _PostDetailsState extends State<PostDetails> {
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 6,
+                  ),
                   child: Row(
                     children: [
                       IconButton(
@@ -203,13 +212,17 @@ class _PostDetailsState extends State<PostDetails> {
                             views: 2500,
                             image: imageUrl,
                           );
-                          final saved = await _savedPostsService.toggleSave(post);
+                          final saved = await _savedPostsService.toggleSave(
+                            post,
+                          );
                           if (!mounted) return;
                           setState(() {});
                           messenger.showSnackBar(
                             SnackBar(
                               content: Text(
-                                saved ? "Post saved to your collection" : "Post removed from saved",
+                                saved
+                                    ? "Post saved to your collection"
+                                    : "Post removed from saved",
                               ),
                               duration: const Duration(seconds: 1),
                             ),
@@ -217,7 +230,9 @@ class _PostDetailsState extends State<PostDetails> {
                         },
                         icon: Icon(
                           isSaved ? Icons.bookmark : Icons.bookmark_border,
-                          color: isSaved ? colorScheme.primary : colorScheme.onSurface,
+                          color: isSaved
+                              ? colorScheme.primary
+                              : colorScheme.onSurface,
                           size: 26,
                         ),
                       ),
@@ -253,9 +268,7 @@ class _PostDetailsState extends State<PostDetails> {
                         ),
                         TextSpan(
                           text: "  Enjoying this awesome moment! ✨",
-                          style: TextStyle(
-                            color: colorScheme.onSurface,
-                          ),
+                          style: TextStyle(color: colorScheme.onSurface),
                         ),
                       ],
                     ),

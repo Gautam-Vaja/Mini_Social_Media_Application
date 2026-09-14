@@ -36,21 +36,24 @@ class _BlockedAccountsScreenState extends State<BlockedAccountsScreen> {
         return StatefulBuilder(
           builder: (context, setModalState) {
             if (allUsers.isEmpty && isLoading) {
-              _userService.getUsers().then((fetched) {
-                if (modalContext.mounted) {
-                  setModalState(() {
-                    allUsers = fetched;
-                    searchResults = fetched;
-                    isLoading = false;
+              _userService
+                  .getUsers()
+                  .then((fetched) {
+                    if (modalContext.mounted) {
+                      setModalState(() {
+                        allUsers = fetched;
+                        searchResults = fetched;
+                        isLoading = false;
+                      });
+                    }
+                  })
+                  .catchError((_) {
+                    if (modalContext.mounted) {
+                      setModalState(() {
+                        isLoading = false;
+                      });
+                    }
                   });
-                }
-              }).catchError((_) {
-                if (modalContext.mounted) {
-                  setModalState(() {
-                    isLoading = false;
-                  });
-                }
-              });
             }
 
             return Padding(
@@ -71,7 +74,10 @@ class _BlockedAccountsScreenState extends State<BlockedAccountsScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -90,7 +96,10 @@ class _BlockedAccountsScreenState extends State<BlockedAccountsScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 6,
+                      ),
                       child: TextField(
                         controller: searchController,
                         decoration: InputDecoration(
@@ -101,7 +110,10 @@ class _BlockedAccountsScreenState extends State<BlockedAccountsScreen> {
                             borderRadius: BorderRadius.circular(16),
                             borderSide: BorderSide.none,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
                         ),
                         onChanged: (query) {
                           setModalState(() {
@@ -119,50 +131,74 @@ class _BlockedAccountsScreenState extends State<BlockedAccountsScreen> {
                       child: isLoading
                           ? const Center(child: CircularProgressIndicator())
                           : (searchResults.isEmpty
-                              ? const Center(child: Text("No users found"))
-                              : ListView.separated(
-                                  itemCount: searchResults.length,
-                                  separatorBuilder: (_, _) => const Divider(height: 1),
-                                  itemBuilder: (context, index) {
-                                    final user = searchResults[index];
-                                    final isBlocked = _blockedUsersService.isBlocked(user.id);
+                                ? const Center(child: Text("No users found"))
+                                : ListView.separated(
+                                    itemCount: searchResults.length,
+                                    separatorBuilder: (_, _) =>
+                                        const Divider(height: 1),
+                                    itemBuilder: (context, index) {
+                                      final user = searchResults[index];
+                                      final isBlocked = _blockedUsersService
+                                          .isBlocked(user.id);
 
-                                    return ListTile(
-                                      leading: CircleAvatar(
-                                        backgroundImage: NetworkImage(user.image),
-                                      ),
-                                      title: Text(user.fullName, style: const TextStyle(fontWeight: FontWeight.w600)),
-                                      subtitle: Text("@${user.username}"),
-                                      trailing: isBlocked
-                                          ? const Text("Blocked", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold))
-                                          : ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.red.shade600,
-                                                foregroundColor: Colors.white,
-                                                elevation: 0,
+                                      return ListTile(
+                                        leading: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                            user.image,
+                                          ),
+                                        ),
+                                        title: Text(
+                                          user.fullName,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        subtitle: Text("@${user.username}"),
+                                        trailing: isBlocked
+                                            ? const Text(
+                                                "Blocked",
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              )
+                                            : ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      Colors.red.shade600,
+                                                  foregroundColor: Colors.white,
+                                                  elevation: 0,
+                                                ),
+                                                onPressed: () async {
+                                                  await _blockedUsersService
+                                                      .blockUser(
+                                                        userId: user.id,
+                                                        username: user.username,
+                                                        fullName: user.fullName,
+                                                        image: user.image,
+                                                      );
+                                                  setModalState(() {});
+                                                  if (modalContext.mounted) {
+                                                    ScaffoldMessenger.of(
+                                                      context,
+                                                    ).showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          "Blocked @${user.username}",
+                                                        ),
+                                                        duration:
+                                                            const Duration(
+                                                              seconds: 1,
+                                                            ),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                                child: const Text("Block"),
                                               ),
-                                              onPressed: () async {
-                                                await _blockedUsersService.blockUser(
-                                                  userId: user.id,
-                                                  username: user.username,
-                                                  fullName: user.fullName,
-                                                  image: user.image,
-                                                );
-                                                setModalState(() {});
-                                                if (modalContext.mounted) {
-                                                  ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(
-                                                      content: Text("Blocked @${user.username}"),
-                                                      duration: const Duration(seconds: 1),
-                                                    ),
-                                                  );
-                                                }
-                                              },
-                                              child: const Text("Block"),
-                                            ),
-                                    );
-                                  },
-                                )),
+                                      );
+                                    },
+                                  )),
                     ),
                   ],
                 ),
@@ -183,10 +219,7 @@ class _BlockedAccountsScreenState extends State<BlockedAccountsScreen> {
       appBar: AppBar(
         title: const Text(
           'Blocked Accounts',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
@@ -272,7 +305,9 @@ class _BlockedAccountsScreenState extends State<BlockedAccountsScreen> {
                     : int.tryParse(user['userId']?.toString() ?? '0') ?? 0;
                 final username = user['username']?.toString() ?? 'User';
                 final fullName = user['fullName']?.toString() ?? username;
-                final image = user['image']?.toString() ?? 'https://i.pravatar.cc/150?img=1';
+                final image =
+                    user['image']?.toString() ??
+                    'https://i.pravatar.cc/150?img=1';
 
                 return ListTile(
                   leading: CircleAvatar(

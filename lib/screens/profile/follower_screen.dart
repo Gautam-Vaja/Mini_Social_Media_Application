@@ -46,9 +46,7 @@ class _FollowersScreenState extends State<FollowersScreen> {
     if (isLoading) {
       return Scaffold(
         appBar: AppBar(title: const Text("Followers")),
-        body: const Center(
-          child: CircularProgressIndicator(),
-        ),
+        body: const Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -56,9 +54,7 @@ class _FollowersScreenState extends State<FollowersScreen> {
       appBar: AppBar(
         title: const Text(
           "Followers",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       body: ListView.builder(
@@ -71,27 +67,19 @@ class _FollowersScreenState extends State<FollowersScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => UsersProfile(
-                    userId: user.id,
-                  ),
+                  builder: (context) => UsersProfile(userId: user.id),
                 ),
               );
             },
             leading: CircleAvatar(
               radius: 24,
-              backgroundImage: NetworkImage(
-                user.image,
-              ),
+              backgroundImage: NetworkImage(user.image),
             ),
             title: Text(
               user.fullName,
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w600),
             ),
-            subtitle: Text(
-              "@${user.username}",
-            ),
+            subtitle: Text("@${user.username}"),
             trailing: SizedBox(
               width: 95,
               height: 36,

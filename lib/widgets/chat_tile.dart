@@ -5,11 +5,7 @@ class ChatTile extends StatelessWidget {
   final ChatModel chat;
   final VoidCallback? onTap;
 
-  const ChatTile({
-    super.key,
-    required this.chat,
-    this.onTap,
-  });
+  const ChatTile({super.key, required this.chat, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +18,7 @@ class ChatTile extends StatelessWidget {
         onTap: onTap,
 
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 10,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
 
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,27 +26,23 @@ class ChatTile extends StatelessWidget {
               // ==================================================
               // PROFILE IMAGE
               // ==================================================
-
               Stack(
                 clipBehavior: Clip.none,
                 children: [
                   CircleAvatar(
                     radius: 28,
 
-                    backgroundColor:
-                        colorScheme.surfaceContainerHighest,
+                    backgroundColor: colorScheme.surfaceContainerHighest,
 
-                    backgroundImage:
-                        chat.image.isNotEmpty
-                            ? NetworkImage(chat.image)
-                            : null,
+                    backgroundImage: chat.image.isNotEmpty
+                        ? NetworkImage(chat.image)
+                        : null,
 
                     child: chat.image.isEmpty
                         ? Icon(
                             Icons.person,
                             size: 30,
-                            color:
-                                colorScheme.onSurfaceVariant,
+                            color: colorScheme.onSurfaceVariant,
                           )
                         : null,
                   ),
@@ -87,17 +76,14 @@ class ChatTile extends StatelessWidget {
               // ==================================================
               // CHAT INFORMATION
               // ==================================================
-
               Expanded(
                 child: Column(
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
 
                   children: [
                     // ============================================
                     // NAME + TIME
                     // ============================================
-
                     Row(
                       children: [
                         // NAME
@@ -107,17 +93,14 @@ class ChatTile extends StatelessWidget {
 
                             maxLines: 1,
 
-                            overflow:
-                                TextOverflow.ellipsis,
+                            overflow: TextOverflow.ellipsis,
 
                             style: TextStyle(
-                              color:
-                                  colorScheme.onSurface,
+                              color: colorScheme.onSurface,
 
                               fontSize: 16,
 
-                              fontWeight:
-                                  FontWeight.w600,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -131,12 +114,10 @@ class ChatTile extends StatelessWidget {
 
                             maxLines: 1,
 
-                            overflow:
-                                TextOverflow.ellipsis,
+                            overflow: TextOverflow.ellipsis,
 
                             style: TextStyle(
-                              color: colorScheme
-                                  .onSurfaceVariant,
+                              color: colorScheme.onSurfaceVariant,
 
                               fontSize: 12,
                             ),
@@ -150,15 +131,13 @@ class ChatTile extends StatelessWidget {
                     // ============================================
                     // LAST MESSAGE
                     // ============================================
-
                     Row(
                       children: [
                         // READ CHECK
                         if (chat.isRead) ...[
                           Icon(
                             Icons.done_all,
-                            color:
-                                colorScheme.primary,
+                            color: colorScheme.primary,
                             size: 18,
                           ),
 
@@ -172,12 +151,10 @@ class ChatTile extends StatelessWidget {
 
                             maxLines: 1,
 
-                            overflow:
-                                TextOverflow.ellipsis,
+                            overflow: TextOverflow.ellipsis,
 
                             style: TextStyle(
-                              color: colorScheme
-                                  .onSurfaceVariant,
+                              color: colorScheme.onSurfaceVariant,
 
                               fontSize: 14,
                             ),
@@ -192,21 +169,16 @@ class ChatTile extends StatelessWidget {
               // ==================================================
               // UNREAD BADGE
               // ==================================================
-
               if (chat.unread > 0) ...[
                 const SizedBox(width: 8),
 
                 Container(
-                  constraints:
-                      const BoxConstraints(
+                  constraints: const BoxConstraints(
                     minWidth: 22,
                     minHeight: 22,
                   ),
 
-                  padding:
-                      const EdgeInsets.symmetric(
-                    horizontal: 5,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
 
                   decoration: BoxDecoration(
                     color: colorScheme.primary,
@@ -217,20 +189,16 @@ class ChatTile extends StatelessWidget {
                   alignment: Alignment.center,
 
                   child: Text(
-                    chat.unread > 99
-                        ? '99+'
-                        : chat.unread.toString(),
+                    chat.unread > 99 ? '99+' : chat.unread.toString(),
 
                     maxLines: 1,
 
                     style: TextStyle(
-                      color:
-                          colorScheme.onPrimary,
+                      color: colorScheme.onPrimary,
 
                       fontSize: 10,
 
-                      fontWeight:
-                          FontWeight.bold,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

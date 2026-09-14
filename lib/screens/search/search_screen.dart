@@ -60,10 +60,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     try {
-      final data = await postService.getPosts(
-        page: currentPage,
-        limit: limit,
-      );
+      final data = await postService.getPosts(page: currentPage, limit: limit);
 
       if (!mounted) return;
 
@@ -120,7 +117,9 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   void openPost(int index) {
-    if (filteredPosts.isEmpty || index < 0 || index >= filteredPosts.length) return;
+    if (filteredPosts.isEmpty || index < 0 || index >= filteredPosts.length) {
+      return;
+    }
 
     final List<String> postImages = filteredPosts.map((p) => p.image).toList();
     final post = filteredPosts[index];
@@ -132,7 +131,8 @@ class _SearchScreenState extends State<SearchScreen> {
           postImages: postImages,
           initialIndex: index,
           username: "user${post.userId}",
-          profileImage: "https://i.pravatar.cc/150?img=${(post.userId % 70) + 1}",
+          profileImage:
+              "https://i.pravatar.cc/150?img=${(post.userId % 70) + 1}",
         ),
       ),
     );
@@ -150,7 +150,9 @@ class _SearchScreenState extends State<SearchScreen> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    final visiblePosts = filteredPosts.where((p) => !_blockedUsersService.isBlocked(p.userId)).toList();
+    final visiblePosts = filteredPosts
+        .where((p) => !_blockedUsersService.isBlocked(p.userId))
+        .toList();
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -263,10 +265,7 @@ class _SearchScreenState extends State<SearchScreen> {
       return Center(
         child: Text(
           "No users found",
-          style: TextStyle(
-            color: colorScheme.onSurfaceVariant,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: colorScheme.onSurfaceVariant, fontSize: 16),
         ),
       );
     }
@@ -283,7 +282,10 @@ class _SearchScreenState extends State<SearchScreen> {
         final isBlocked = _blockedUsersService.isBlocked(user.id);
 
         return ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 6,
+          ),
           leading: CircleAvatar(
             radius: 25,
             backgroundImage: NetworkImage(user.image),
@@ -300,7 +302,10 @@ class _SearchScreenState extends State<SearchScreen> {
               if (isBlocked) ...[
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: colorScheme.error.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(6),

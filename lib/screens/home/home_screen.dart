@@ -130,7 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 ListTile(
                   leading: Icon(
-                    isSaved ? Icons.bookmark_remove_outlined : Icons.bookmark_add_outlined,
+                    isSaved
+                        ? Icons.bookmark_remove_outlined
+                        : Icons.bookmark_add_outlined,
                   ),
                   title: Text(isSaved ? "Remove from Saved" : "Save Post"),
                   onTap: () async {
@@ -140,7 +142,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     setState(() {});
                     messenger.showSnackBar(
                       SnackBar(
-                        content: Text(saved ? "Post saved to your collection" : "Post removed from saved"),
+                        content: Text(
+                          saved
+                              ? "Post saved to your collection"
+                              : "Post removed from saved",
+                        ),
                         duration: const Duration(seconds: 1),
                       ),
                     );
@@ -177,7 +183,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     setState(() {});
                     messenger.showSnackBar(
                       SnackBar(
-                        content: Text("Blocked @${user.username}. You can manage blocked users in Settings."),
+                        content: Text(
+                          "Blocked @${user.username}. You can manage blocked users in Settings.",
+                        ),
                         duration: const Duration(seconds: 2),
                       ),
                     );
@@ -222,7 +230,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -245,8 +256,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: FutureBuilder<List<CommentModel>>(
                         future: commentService.getComments(postId),
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
                           }
 
                           final comments = snapshot.data ?? [];
@@ -275,13 +289,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
 
                           return ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
                             itemCount: comments.length,
                             itemBuilder: (context, index) {
                               final comment = comments[index];
 
                               return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                ),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -294,7 +313,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             comment.username,
@@ -306,13 +326,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                           const SizedBox(height: 2),
                                           Text(
                                             comment.body,
-                                            style: const TextStyle(fontSize: 14),
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
                                     IconButton(
-                                      icon: const Icon(Icons.favorite_border, size: 16),
+                                      icon: const Icon(
+                                        Icons.favorite_border,
+                                        size: 16,
+                                      ),
                                       onPressed: () {},
                                     ),
                                   ],
@@ -324,12 +349,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.surface,
                         border: Border(
                           top: BorderSide(
-                            color: Theme.of(context).colorScheme.outlineVariant.withValues(alpha: 0.5),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.outlineVariant.withValues(alpha: 0.5),
                           ),
                         ),
                       ),
@@ -342,7 +372,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 decoration: InputDecoration(
                                   hintText: "Add a comment...",
                                   filled: true,
-                                  fillColor: Theme.of(context).colorScheme.surfaceContainerHighest,
+                                  fillColor: Theme.of(
+                                    context,
+                                  ).colorScheme.surfaceContainerHighest,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(24),
                                     borderSide: BorderSide.none,
@@ -393,7 +425,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final messenger = ScaffoldMessenger.of(context);
 
     // Filter out posts from blocked users
-    final visiblePosts = posts.where((p) => !_blockedUsersService.isBlocked(p.userId)).toList();
+    final visiblePosts = posts
+        .where((p) => !_blockedUsersService.isBlocked(p.userId))
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -493,7 +527,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             if (progress == null) return child;
                             return Container(
                               color: colorScheme.surfaceContainerHighest,
-                              child: const Center(child: CircularProgressIndicator()),
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             );
                           },
                           errorBuilder: (context, error, stack) => Container(
@@ -504,7 +540,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 4,
+                      ),
                       child: Row(
                         children: [
                           IconButton(
@@ -538,13 +577,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Spacer(),
                           IconButton(
                             onPressed: () async {
-                              final saved = await _savedPostsService.toggleSave(post);
+                              final saved = await _savedPostsService.toggleSave(
+                                post,
+                              );
                               if (!mounted) return;
                               setState(() {});
                               messenger.showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    saved ? "Post saved to your collection" : "Post removed from saved",
+                                    saved
+                                        ? "Post saved to your collection"
+                                        : "Post removed from saved",
                                   ),
                                   duration: const Duration(seconds: 1),
                                 ),
@@ -595,7 +638,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       visualDensity: VisualDensity.compact,
                                       padding: EdgeInsets.zero,
-                                      backgroundColor: colorScheme.primary.withValues(alpha: 0.1),
+                                      backgroundColor: colorScheme.primary
+                                          .withValues(alpha: 0.1),
                                       side: BorderSide.none,
                                     ),
                                   )

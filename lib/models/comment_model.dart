@@ -16,7 +16,8 @@ class CommentModel {
   factory CommentModel.fromJson(Map<String, dynamic> json) {
     String parsedUsername = 'User';
     if (json['user'] is Map) {
-      parsedUsername = json['user']['username']?.toString() ??
+      parsedUsername =
+          json['user']['username']?.toString() ??
           json['user']['fullName']?.toString() ??
           'User';
     } else if (json['username'] != null) {
@@ -24,11 +25,17 @@ class CommentModel {
     }
 
     return CommentModel(
-      id: json['id'] is int ? json['id'] : int.tryParse(json['id']?.toString() ?? '0') ?? 0,
-      postId: json['postId'] is int ? json['postId'] : int.tryParse(json['postId']?.toString() ?? '0') ?? 0,
+      id: json['id'] is int
+          ? json['id']
+          : int.tryParse(json['id']?.toString() ?? '0') ?? 0,
+      postId: json['postId'] is int
+          ? json['postId']
+          : int.tryParse(json['postId']?.toString() ?? '0') ?? 0,
       body: json['body']?.toString() ?? '',
       username: parsedUsername,
-      likes: json['likes'] is int ? json['likes'] : int.tryParse(json['likes']?.toString() ?? '0') ?? 0,
+      likes: json['likes'] is int
+          ? json['likes']
+          : int.tryParse(json['likes']?.toString() ?? '0') ?? 0,
     );
   }
 

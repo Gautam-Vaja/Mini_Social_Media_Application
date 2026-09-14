@@ -31,7 +31,8 @@ class _SavePostScreenState extends State<SavePostScreen> {
           postImages: images,
           initialIndex: index,
           username: "user${post.userId}",
-          profileImage: "https://i.pravatar.cc/150?img=${(post.userId % 70) + 1}",
+          profileImage:
+              "https://i.pravatar.cc/150?img=${(post.userId % 70) + 1}",
         ),
       ),
     );
@@ -46,10 +47,7 @@ class _SavePostScreenState extends State<SavePostScreen> {
       appBar: AppBar(
         title: const Text(
           'Saved Posts',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       body: ListenableBuilder(
@@ -128,13 +126,20 @@ class _SavePostScreenState extends State<SavePostScreen> {
                             if (progress == null) return child;
                             return Container(
                               color: colorScheme.surfaceContainerHighest,
-                              child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                              child: const Center(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                ),
+                              ),
                             );
                           },
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
                               color: colorScheme.surfaceContainerHighest,
-                              child: Icon(Icons.broken_image, color: colorScheme.onSurfaceVariant),
+                              child: Icon(
+                                Icons.broken_image,
+                                color: colorScheme.onSurfaceVariant,
+                              ),
                             );
                           },
                         ),

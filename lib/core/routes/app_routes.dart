@@ -119,10 +119,7 @@ final GoRouter appRouter = GoRouter(
     ),
     ShellRoute(
       builder: (context, state, child) {
-        return _AppNavigationShell(
-          currentPath: state.uri.path,
-          child: child,
-        );
+        return _AppNavigationShell(currentPath: state.uri.path, child: child);
       },
       routes: [
         GoRoute(
@@ -155,7 +152,8 @@ final GoRouter appRouter = GoRouter(
                 postImages: [extra.image],
                 initialIndex: 0,
                 username: 'User ${extra.userId}',
-                profileImage: 'https://i.pravatar.cc/150?img=${(extra.userId % 70) + 1}',
+                profileImage:
+                    'https://i.pravatar.cc/150?img=${(extra.userId % 70) + 1}',
               );
             }
             return PostDetails(
@@ -172,10 +170,7 @@ final GoRouter appRouter = GoRouter(
 );
 
 class _AppNavigationShell extends StatelessWidget {
-  const _AppNavigationShell({
-    required this.currentPath,
-    required this.child,
-  });
+  const _AppNavigationShell({required this.currentPath, required this.child});
 
   final String currentPath;
   final Widget child;
@@ -247,7 +242,9 @@ class _AppNavigationShell extends StatelessWidget {
                         Expanded(
                           child: OutlinedButton.icon(
                             onPressed: () async {
-                              final image = await picker.pickImage(source: ImageSource.gallery);
+                              final image = await picker.pickImage(
+                                source: ImageSource.gallery,
+                              );
                               if (image != null) {
                                 setStateModal(() {
                                   selectedImagePath = image.path;
@@ -262,7 +259,9 @@ class _AppNavigationShell extends StatelessWidget {
                         Expanded(
                           child: OutlinedButton.icon(
                             onPressed: () async {
-                              final image = await picker.pickImage(source: ImageSource.camera);
+                              final image = await picker.pickImage(
+                                source: ImageSource.camera,
+                              );
                               if (image != null) {
                                 setStateModal(() {
                                   selectedImagePath = image.path;
@@ -285,12 +284,19 @@ class _AppNavigationShell extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.check_circle, color: Colors.green, size: 18),
+                            const Icon(
+                              Icons.check_circle,
+                              color: Colors.green,
+                              size: 18,
+                            ),
                             const SizedBox(width: 8),
                             const Expanded(
                               child: Text(
                                 "Image selected!",
-                                style: TextStyle(color: Colors.green, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                             IconButton(
@@ -312,7 +318,9 @@ class _AppNavigationShell extends StatelessWidget {
                       controller: titleController,
                       decoration: InputDecoration(
                         labelText: 'Post Title',
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -321,7 +329,9 @@ class _AppNavigationShell extends StatelessWidget {
                       maxLines: 3,
                       decoration: InputDecoration(
                         labelText: 'Write a caption...',
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -330,16 +340,24 @@ class _AppNavigationShell extends StatelessWidget {
                       height: 48,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.primary,
-                          foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.onPrimary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(24),
+                          ),
                         ),
                         onPressed: () {
                           if (titleController.text.trim().isEmpty &&
                               captionController.text.trim().isEmpty &&
                               selectedImagePath == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Please add content or an image')),
+                              const SnackBar(
+                                content: Text('Please add content or an image'),
+                              ),
                             );
                             return;
                           }
@@ -351,7 +369,13 @@ class _AppNavigationShell extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Text('Share Post', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        child: const Text(
+                          'Share Post',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ),
                   ],

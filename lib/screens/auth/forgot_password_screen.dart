@@ -96,9 +96,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reset Password'),
-      ),
+      appBar: AppBar(title: const Text('Reset Password')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -207,7 +205,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     child: Row(
                       children: [
                         Icon(
-                          _isError ? Icons.error_outline : Icons.check_circle_outline,
+                          _isError
+                              ? Icons.error_outline
+                              : Icons.check_circle_outline,
                           color: _isError ? colorScheme.error : Colors.green,
                         ),
                         const SizedBox(width: 10),
@@ -215,7 +215,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           child: Text(
                             _message!,
                             style: TextStyle(
-                              color: _isError ? colorScheme.error : Colors.green.shade800,
+                              color: _isError
+                                  ? colorScheme.error
+                                  : Colors.green.shade800,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),

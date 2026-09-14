@@ -17,7 +17,8 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   bool _obscurePassword = true;
   bool _isLoading = false;
@@ -90,11 +91,11 @@ class _SignupScreenState extends State<SignupScreen> {
     });
 
     try {
-      final UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      );
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+          );
 
       final firebaseUser = userCredential.user;
       if (firebaseUser == null) {
@@ -108,7 +109,8 @@ class _SignupScreenState extends State<SignupScreen> {
         'fullName': _fullnameController.text.trim(),
         'username': _usernameController.text.trim(),
         'email': _emailController.text.trim(),
-        'image': 'https://i.pravatar.cc/150?img=${(uid.hashCode.abs() % 70) + 1}',
+        'image':
+            'https://i.pravatar.cc/150?img=${(uid.hashCode.abs() % 70) + 1}',
         'bio': 'Hey there! I am using Mini Social Media.',
         'phoneNumber': '',
         'followersCount': 0,
@@ -168,10 +170,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 24,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Form(
             key: _formKey,
             child: Column(
@@ -205,7 +204,11 @@ class _SignupScreenState extends State<SignupScreen> {
                 TextFormField(
                   controller: _fullnameController,
                   validator: _validateFullName,
-                  decoration: _inputDecoration(context, 'John Doe', Icons.person_outline),
+                  decoration: _inputDecoration(
+                    context,
+                    'John Doe',
+                    Icons.person_outline,
+                  ),
                 ),
 
                 const SizedBox(height: 18),
@@ -215,7 +218,11 @@ class _SignupScreenState extends State<SignupScreen> {
                 TextFormField(
                   controller: _usernameController,
                   validator: _validateUserName,
-                  decoration: _inputDecoration(context, 'johndoe', Icons.alternate_email),
+                  decoration: _inputDecoration(
+                    context,
+                    'johndoe',
+                    Icons.alternate_email,
+                  ),
                 ),
 
                 const SizedBox(height: 18),
@@ -226,7 +233,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   validator: _validateEmail,
-                  decoration: _inputDecoration(context, 'john@example.com', Icons.email_outlined),
+                  decoration: _inputDecoration(
+                    context,
+                    'john@example.com',
+                    Icons.email_outlined,
+                  ),
                 ),
 
                 const SizedBox(height: 18),
@@ -237,19 +248,26 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: _passwordController,
                   obscureText: _obscurePassword,
                   validator: _validatePassword,
-                  decoration: _inputDecoration(context, '••••••••', Icons.lock_outline).copyWith(
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
-                        color: colorScheme.onSurfaceVariant,
+                  decoration:
+                      _inputDecoration(
+                        context,
+                        '••••••••',
+                        Icons.lock_outline,
+                      ).copyWith(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                  ),
                 ),
 
                 const SizedBox(height: 18),
@@ -268,7 +286,11 @@ class _SignupScreenState extends State<SignupScreen> {
                     }
                     return null;
                   },
-                  decoration: _inputDecoration(context, '••••••••', Icons.lock_outline),
+                  decoration: _inputDecoration(
+                    context,
+                    '••••••••',
+                    Icons.lock_outline,
+                  ),
                 ),
 
                 const SizedBox(height: 16),
@@ -286,10 +308,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     child: Text(
                       _errorMessage!,
-                      style: TextStyle(
-                        color: colorScheme.error,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: colorScheme.error, fontSize: 14),
                     ),
                   ),
 
@@ -333,9 +352,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       : () {
                           context.pushReplacement(
                             '/login',
-                            extra: {
-                              'email': _emailController.text.trim(),
-                            },
+                            extra: {'email': _emailController.text.trim()},
                           );
                         },
                   child: Text(
@@ -365,13 +382,15 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  InputDecoration _inputDecoration(BuildContext context, String hint, IconData icon) {
+  InputDecoration _inputDecoration(
+    BuildContext context,
+    String hint,
+    IconData icon,
+  ) {
     return InputDecoration(
       hintText: hint,
       prefixIcon: Icon(icon),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
     );
   }

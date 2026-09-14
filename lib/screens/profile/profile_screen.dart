@@ -109,7 +109,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
     }
 
-    final user = currentUser ??
+    final user =
+        currentUser ??
         UserModel(
           id: 1,
           fullName: 'User Profile',
@@ -225,7 +226,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const FollowingScreen()),
+                          MaterialPageRoute(
+                            builder: (_) => const FollowingScreen(),
+                          ),
                         );
                       },
                       child: _buildStat(context, '50', 'Following'),
@@ -268,11 +271,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 const SizedBox(height: 25),
 
-                Divider(height: 1, color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+                Divider(
+                  height: 1,
+                  color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+                ),
 
                 const SizedBox(height: 15),
 
-                Icon(Icons.grid_on_rounded, size: 24, color: colorScheme.onSurface),
+                Icon(
+                  Icons.grid_on_rounded,
+                  size: 24,
+                  color: colorScheme.onSurface,
+                ),
 
                 const SizedBox(height: 12),
 

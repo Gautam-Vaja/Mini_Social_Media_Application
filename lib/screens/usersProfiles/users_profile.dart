@@ -9,10 +9,7 @@ import 'package:mini_social_media_application/services/post_service.dart';
 class UsersProfile extends StatefulWidget {
   final int userId;
 
-  const UsersProfile({
-    super.key,
-    required this.userId,
-  });
+  const UsersProfile({super.key, required this.userId});
 
   @override
   State<UsersProfile> createState() => _UsersProfileState();
@@ -76,7 +73,11 @@ class _UsersProfileState extends State<UsersProfile> {
 
     final List<String> images = userPosts.isNotEmpty
         ? userPosts.map((p) => p.image).toList()
-        : List.generate(6, (i) => 'https://picsum.photos/500/500?random=${widget.userId * 10 + i}');
+        : List.generate(
+            6,
+            (i) =>
+                'https://picsum.photos/500/500?random=${widget.userId * 10 + i}',
+          );
 
     Navigator.push(
       context,
@@ -100,7 +101,11 @@ class _UsersProfileState extends State<UsersProfile> {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: Text(isCurrentlyBlocked ? "Unblock @${user!.username}?" : "Block @${user!.username}?"),
+          title: Text(
+            isCurrentlyBlocked
+                ? "Unblock @${user!.username}?"
+                : "Block @${user!.username}?",
+          ),
           content: Text(
             isCurrentlyBlocked
                 ? "They will be able to view your profile and send you messages."
@@ -113,8 +118,12 @@ class _UsersProfileState extends State<UsersProfile> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: isCurrentlyBlocked ? null : Theme.of(context).colorScheme.error,
-                foregroundColor: isCurrentlyBlocked ? null : Theme.of(context).colorScheme.onError,
+                backgroundColor: isCurrentlyBlocked
+                    ? null
+                    : Theme.of(context).colorScheme.error,
+                foregroundColor: isCurrentlyBlocked
+                    ? null
+                    : Theme.of(context).colorScheme.onError,
               ),
               onPressed: () async {
                 Navigator.pop(dialogContext);
@@ -166,10 +175,7 @@ class _UsersProfileState extends State<UsersProfile> {
       return Scaffold(
         appBar: AppBar(),
         body: const Center(
-          child: Text(
-            "User not found",
-            style: TextStyle(fontSize: 18),
-          ),
+          child: Text("User not found", style: TextStyle(fontSize: 18)),
         ),
       );
     }
@@ -193,7 +199,9 @@ class _UsersProfileState extends State<UsersProfile> {
                 _showBlockDialog();
               } else if (value == 'share') {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Profile link copied: @${user!.username}")),
+                  SnackBar(
+                    content: Text("Profile link copied: @${user!.username}"),
+                  ),
                 );
               }
             },
@@ -210,7 +218,9 @@ class _UsersProfileState extends State<UsersProfile> {
                     const SizedBox(width: 10),
                     Text(
                       isBlocked ? 'Unblock User' : 'Block User',
-                      style: TextStyle(color: isBlocked ? null : colorScheme.error),
+                      style: TextStyle(
+                        color: isBlocked ? null : colorScheme.error,
+                      ),
                     ),
                   ],
                 ),
@@ -235,7 +245,10 @@ class _UsersProfileState extends State<UsersProfile> {
             if (isBlocked) ...[
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 color: colorScheme.error.withValues(alpha: 0.12),
                 child: Row(
                   children: [
@@ -272,10 +285,7 @@ class _UsersProfileState extends State<UsersProfile> {
 
             Text(
               user!.fullName,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 4),
@@ -305,8 +315,14 @@ class _UsersProfileState extends State<UsersProfile> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildStat(value: "$postCount", title: "Posts"),
-                _buildStat(value: "${(widget.userId * 43) % 800 + 40}", title: "Followers"),
-                _buildStat(value: "${(widget.userId * 21) % 400 + 20}", title: "Following"),
+                _buildStat(
+                  value: "${(widget.userId * 43) % 800 + 40}",
+                  title: "Followers",
+                ),
+                _buildStat(
+                  value: "${(widget.userId * 21) % 400 + 20}",
+                  title: "Following",
+                ),
               ],
             ),
 
@@ -341,8 +357,8 @@ class _UsersProfileState extends State<UsersProfile> {
                           backgroundColor: isBlocked
                               ? colorScheme.surfaceContainerHighest
                               : (isFollowing
-                                  ? colorScheme.surfaceContainerHighest
-                                  : colorScheme.primary),
+                                    ? colorScheme.surfaceContainerHighest
+                                    : colorScheme.primary),
                           foregroundColor: (isBlocked || isFollowing)
                               ? colorScheme.onSurface
                               : colorScheme.onPrimary,
@@ -401,7 +417,10 @@ class _UsersProfileState extends State<UsersProfile> {
 
             const SizedBox(height: 25),
 
-            Divider(height: 1, color: colorScheme.outlineVariant.withValues(alpha: 0.5)),
+            Divider(
+              height: 1,
+              color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+            ),
 
             Padding(
               padding: const EdgeInsets.all(15),
@@ -425,10 +444,17 @@ class _UsersProfileState extends State<UsersProfile> {
 
             if (isBlocked) ...[
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 40,
+                  horizontal: 24,
+                ),
                 child: Column(
                   children: [
-                    Icon(Icons.lock_outline, size: 48, color: colorScheme.onSurfaceVariant),
+                    Icon(
+                      Icons.lock_outline,
+                      size: 48,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                     const SizedBox(height: 12),
                     Text(
                       "Posts Hidden",
@@ -461,7 +487,8 @@ class _UsersProfileState extends State<UsersProfile> {
                 ),
                 itemCount: postCount,
                 itemBuilder: (context, index) {
-                  final imageUrl = (userPosts.isNotEmpty && index < userPosts.length)
+                  final imageUrl =
+                      (userPosts.isNotEmpty && index < userPosts.length)
                       ? userPosts[index].image
                       : 'https://picsum.photos/500/500?random=${widget.userId * 10 + index}';
 
@@ -485,7 +512,10 @@ class _UsersProfileState extends State<UsersProfile> {
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           color: colorScheme.surfaceContainerHighest,
-                          child: Icon(Icons.image, color: colorScheme.onSurfaceVariant),
+                          child: Icon(
+                            Icons.image,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                         );
                       },
                     ),
@@ -506,10 +536,7 @@ class _UsersProfileState extends State<UsersProfile> {
       children: [
         Text(
           value,
-          style: const TextStyle(
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
-          ),
+          style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
         Text(

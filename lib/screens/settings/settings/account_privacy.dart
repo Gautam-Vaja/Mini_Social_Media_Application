@@ -19,10 +19,7 @@ class _AccountPrivacyState extends State<AccountPrivacy> {
       appBar: AppBar(
         title: const Text(
           'Account Privacy',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
       ),
       body: ListView(

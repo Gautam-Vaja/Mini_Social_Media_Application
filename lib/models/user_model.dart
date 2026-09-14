@@ -37,7 +37,8 @@ class UserModel {
     }
 
     // Handle avatar image fallbacks
-    String avatarUrl = json['image']?.toString() ??
+    String avatarUrl =
+        json['image']?.toString() ??
         json['photoUrl']?.toString() ??
         json['photoURL']?.toString() ??
         json['profileImageUrl']?.toString() ??

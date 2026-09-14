@@ -13,9 +13,7 @@ class SearchService {
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);
 
-      return (json["users"] as List)
-          .map((e) => UserModel.fromJson(e))
-          .toList();
+      return (json["users"] as List).map((e) => UserModel.fromJson(e)).toList();
     } else {
       throw Exception("Failed to search users");
     }

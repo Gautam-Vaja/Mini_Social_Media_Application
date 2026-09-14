@@ -4,11 +4,7 @@ class ChatDetailScreen extends StatefulWidget {
   final String name;
   final String? image;
 
-  const ChatDetailScreen({
-    super.key,
-    required this.name,
-    this.image,
-  });
+  const ChatDetailScreen({super.key, required this.name, this.image});
 
   @override
   State<ChatDetailScreen> createState() => _ChatDetailScreenState();
@@ -19,11 +15,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   final ScrollController scrollController = ScrollController();
 
   final List<Map<String, dynamic>> messages = [
-    {
-      'message': 'Hey there! 👋',
-      'isMe': false,
-      'time': '10:00 AM',
-    },
+    {'message': 'Hey there! 👋', 'isMe': false, 'time': '10:00 AM'},
     {
       'message': 'Hello! How are you doing today?',
       'isMe': true,
@@ -48,11 +40,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     if (text.isEmpty) return;
 
     setState(() {
-      messages.add({
-        'message': text,
-        'isMe': true,
-        'time': 'Now',
-      });
+      messages.add({'message': text, 'isMe': true, 'time': 'Now'});
     });
 
     messageController.clear();
@@ -149,10 +137,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             onPressed: () {},
             icon: const Icon(Icons.videocam_outlined),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.call_outlined),
-          ),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.call_outlined)),
         ],
       ),
       body: SafeArea(
@@ -161,12 +146,20 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             Expanded(
               child: ListView.builder(
                 controller: scrollController,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
                 itemCount: messages.length,
                 itemBuilder: (context, index) {
                   final message = messages[index];
                   final bool isMe = message['isMe'] == true;
-                  return _messageBubble(context, message['message'], message['time'] ?? '', isMe);
+                  return _messageBubble(
+                    context,
+                    message['message'],
+                    message['time'] ?? '',
+                    isMe,
+                  );
                 },
               ),
             ),
@@ -177,7 +170,12 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     );
   }
 
-  Widget _messageBubble(BuildContext context, String message, String time, bool isMe) {
+  Widget _messageBubble(
+    BuildContext context,
+    String message,
+    String time,
+    bool isMe,
+  ) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Align(
@@ -189,7 +187,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: isMe ? colorScheme.primary : colorScheme.surfaceContainerHighest,
+          color: isMe
+              ? colorScheme.primary
+              : colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(18),
             topRight: const Radius.circular(18),
@@ -198,7 +198,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
           ),
         ),
         child: Column(
-          crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+          crossAxisAlignment: isMe
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
           children: [
             Text(
               message,
@@ -232,11 +234,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
       padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
       decoration: BoxDecoration(
         color: colorScheme.surface,
-        border: Border(
-          top: BorderSide(
-            color: colorScheme.outlineVariant,
-          ),
-        ),
+        border: Border(top: BorderSide(color: colorScheme.outlineVariant)),
       ),
       child: Row(
         children: [
@@ -260,17 +258,17 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                   borderRadius: BorderRadius.circular(24),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
               ),
             ),
           ),
           const SizedBox(width: 8),
           IconButton(
             onPressed: sendMessage,
-            icon: Icon(
-              Icons.send_rounded,
-              color: colorScheme.primary,
-            ),
+            icon: Icon(Icons.send_rounded, color: colorScheme.primary),
           ),
         ],
       ),

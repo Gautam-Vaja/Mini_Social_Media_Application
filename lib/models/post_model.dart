@@ -27,9 +27,15 @@ class PostModel {
       parsedLikes = (json['reactions']['likes'] as num).toInt();
     }
 
-    final parsedId = (json['id'] is num) ? (json['id'] as num).toInt() : int.tryParse(json['id']?.toString() ?? '0') ?? 0;
-    final parsedUserId = (json['userId'] is num) ? (json['userId'] as num).toInt() : int.tryParse(json['userId']?.toString() ?? '0') ?? 0;
-    final parsedViews = (json['views'] is num) ? (json['views'] as num).toInt() : 0;
+    final parsedId = (json['id'] is num)
+        ? (json['id'] as num).toInt()
+        : int.tryParse(json['id']?.toString() ?? '0') ?? 0;
+    final parsedUserId = (json['userId'] is num)
+        ? (json['userId'] as num).toInt()
+        : int.tryParse(json['userId']?.toString() ?? '0') ?? 0;
+    final parsedViews = (json['views'] is num)
+        ? (json['views'] as num).toInt()
+        : 0;
 
     final customImage = json['image']?.toString();
 

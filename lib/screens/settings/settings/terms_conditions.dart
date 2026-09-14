@@ -12,10 +12,7 @@ class TermsConditionsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Terms & Conditions',
-          style: TextStyle(
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(

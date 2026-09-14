@@ -7,11 +7,7 @@ class LoginScreen extends StatefulWidget {
   final String? initialEmail;
   final String? initialPassword;
 
-  const LoginScreen({
-    super.key,
-    this.initialEmail,
-    this.initialPassword,
-  });
+  const LoginScreen({super.key, this.initialEmail, this.initialPassword});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -53,35 +49,29 @@ class _LoginScreenState extends State<LoginScreen> {
     final userDocument = await userReference.get();
     final Map<String, dynamic> userData = userDocument.data() ?? {};
 
-    await userReference.set(
-      {
-        'userId': user.uid,
-        'email': _firstNonEmpty([
-          userData['email'],
-          user.email,
-        ]),
-        'fullName': _firstNonEmpty([
-          userData['fullName'],
-          user.displayName,
-          userData['username'],
-          user.email?.split('@').first,
-        ]),
-        'username': _firstNonEmpty([
-          userData['username'],
-          user.email?.split('@').first,
-        ]),
-        'image': _firstNonEmpty([
-          userData['image'],
-          userData['photoUrl'],
-          userData['photoURL'],
-          userData['profileImageUrl'],
-          user.photoURL,
-        ]),
-        'bio': userData['bio'] ?? '',
-        'lastSignedInAt': FieldValue.serverTimestamp(),
-      },
-      SetOptions(merge: true),
-    );
+    await userReference.set({
+      'userId': user.uid,
+      'email': _firstNonEmpty([userData['email'], user.email]),
+      'fullName': _firstNonEmpty([
+        userData['fullName'],
+        user.displayName,
+        userData['username'],
+        user.email?.split('@').first,
+      ]),
+      'username': _firstNonEmpty([
+        userData['username'],
+        user.email?.split('@').first,
+      ]),
+      'image': _firstNonEmpty([
+        userData['image'],
+        userData['photoUrl'],
+        userData['photoURL'],
+        userData['profileImageUrl'],
+        user.photoURL,
+      ]),
+      'bio': userData['bio'] ?? '',
+      'lastSignedInAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
   }
 
   @override
@@ -200,10 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 20,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Form(
             key: _formKey,
             child: Column(

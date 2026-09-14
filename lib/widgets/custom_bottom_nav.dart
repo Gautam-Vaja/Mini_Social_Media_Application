@@ -26,9 +26,7 @@ class CustomBottomNav extends StatelessWidget {
           decoration: BoxDecoration(
             color: colorScheme.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(38),
-            border: Border.all(
-              color: colorScheme.outlineVariant,
-            ),
+            border: Border.all(color: colorScheme.outlineVariant),
             boxShadow: [
               BoxShadow(
                 color: colorScheme.shadow.withValues(alpha: 0.15),
@@ -130,11 +128,7 @@ class CustomBottomNav extends StatelessWidget {
             ),
           ],
         ),
-        child: Icon(
-          Icons.add_rounded,
-          size: 30,
-          color: colorScheme.onPrimary,
-        ),
+        child: Icon(Icons.add_rounded, size: 30, color: colorScheme.onPrimary),
       ),
     );
   }

@@ -24,22 +24,15 @@ class AppTheme {
       centerTitle: true,
     ),
 
-    cardTheme: const CardThemeData(
-      color: Colors.white,
-    ),
+    cardTheme: const CardThemeData(color: Colors.white),
 
-    inputDecorationTheme:
-        const InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       border: OutlineInputBorder(),
     ),
 
-    elevatedButtonTheme:
-        ElevatedButtonThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(
-          double.infinity,
-          50,
-        ),
+        minimumSize: const Size(double.infinity, 50),
       ),
     ),
   );
@@ -58,8 +51,7 @@ class AppTheme {
       brightness: Brightness.dark,
     ),
 
-    scaffoldBackgroundColor:
-        const Color(0xFF121212),
+    scaffoldBackgroundColor: const Color(0xFF121212),
 
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFF121212),
@@ -68,22 +60,15 @@ class AppTheme {
       centerTitle: true,
     ),
 
-    cardTheme: const CardThemeData(
-      color: Color(0xFF1E1E1E),
-    ),
+    cardTheme: const CardThemeData(color: Color(0xFF1E1E1E)),
 
-    inputDecorationTheme:
-        const InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       border: OutlineInputBorder(),
     ),
 
-    elevatedButtonTheme:
-        ElevatedButtonThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(
-          double.infinity,
-          50,
-        ),
+        minimumSize: const Size(double.infinity, 50),
       ),
     ),
   );

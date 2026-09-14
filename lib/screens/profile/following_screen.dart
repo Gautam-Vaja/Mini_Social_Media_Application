@@ -54,7 +54,10 @@ class _FollowingScreenState extends State<FollowingScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Following", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "Following",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: ListView.builder(
         itemCount: users.length > 50 ? 50 : users.length,

@@ -28,7 +28,8 @@ class BlockedUsersService extends ChangeNotifier {
     return _blockedUsersMemory.containsKey(userId);
   }
 
-  List<Map<String, dynamic>> get blockedUsers => _blockedUsersMemory.values.toList();
+  List<Map<String, dynamic>> get blockedUsers =>
+      _blockedUsersMemory.values.toList();
 
   Future<void> init() async {
     try {
@@ -44,7 +45,9 @@ class BlockedUsersService extends ChangeNotifier {
         final data = doc.data();
         final userId = data['userId'] is int
             ? data['userId'] as int
-            : int.tryParse(doc.id) ?? int.tryParse(data['userId']?.toString() ?? '0') ?? 0;
+            : int.tryParse(doc.id) ??
+                  int.tryParse(data['userId']?.toString() ?? '0') ??
+                  0;
         if (userId != 0) {
           _blockedUsersMemory[userId] = data;
         }

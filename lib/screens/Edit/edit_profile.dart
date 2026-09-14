@@ -142,7 +142,8 @@ class _EditProfileState extends State<EditProfile> {
       }
 
       final data = doc.data()!;
-      fullNameController.text = data['fullName']?.toString() ?? user.displayName ?? '';
+      fullNameController.text =
+          data['fullName']?.toString() ?? user.displayName ?? '';
       usernameController.text = data['username']?.toString() ?? '';
       bioController.text = data['bio']?.toString() ?? '';
       phoneController.text = data['phoneNumber']?.toString() ?? '';
@@ -188,16 +189,15 @@ class _EditProfileState extends State<EditProfile> {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) throw Exception("User is not logged in");
 
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .set({
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
         'fullName': fullNameController.text.trim(),
         'username': usernameController.text.trim(),
         'bio': bioController.text.trim(),
         'phoneNumber': phoneController.text.trim(),
         'gender': selectedGender,
-        'dateOfBirth': selectedDate != null ? Timestamp.fromDate(selectedDate!) : null,
+        'dateOfBirth': selectedDate != null
+            ? Timestamp.fromDate(selectedDate!)
+            : null,
         'updatedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
 
@@ -206,17 +206,15 @@ class _EditProfileState extends State<EditProfile> {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Profile Updated Successfully"),
-        ),
+        const SnackBar(content: Text("Profile Updated Successfully")),
       );
 
       Navigator.pop(context, true);
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error: $e")));
     } finally {
       if (mounted) {
         setState(() {
@@ -245,7 +243,10 @@ class _EditProfileState extends State<EditProfile> {
           : Form(
               key: _formKey,
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
                 child: Column(
                   children: [
                     Stack(
@@ -256,7 +257,10 @@ class _EditProfileState extends State<EditProfile> {
                           backgroundColor: colorScheme.surfaceContainerHighest,
                           backgroundImage: profileImage != null
                               ? FileImage(profileImage!)
-                              : const NetworkImage('https://i.pravatar.cc/150?img=12') as ImageProvider,
+                              : const NetworkImage(
+                                      'https://i.pravatar.cc/150?img=12',
+                                    )
+                                    as ImageProvider,
                         ),
                         CircleAvatar(
                           radius: 18,
@@ -284,7 +288,9 @@ class _EditProfileState extends State<EditProfile> {
                         prefixIcon: const Icon(Icons.person_outline),
                       ),
                       validator: (value) =>
-                          value == null || value.trim().isEmpty ? 'Enter your full name' : null,
+                          value == null || value.trim().isEmpty
+                          ? 'Enter your full name'
+                          : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -297,7 +303,9 @@ class _EditProfileState extends State<EditProfile> {
                         prefixIcon: const Icon(Icons.alternate_email),
                       ),
                       validator: (value) =>
-                          value == null || value.trim().isEmpty ? 'Enter your username' : null,
+                          value == null || value.trim().isEmpty
+                          ? 'Enter your username'
+                          : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -339,8 +347,8 @@ class _EditProfileState extends State<EditProfile> {
                           selectedDate == null
                               ? "Select Date"
                               : "${selectedDate!.day.toString().padLeft(2, '0')}/"
-                                "${selectedDate!.month.toString().padLeft(2, '0')}/"
-                                "${selectedDate!.year}",
+                                    "${selectedDate!.month.toString().padLeft(2, '0')}/"
+                                    "${selectedDate!.year}",
                         ),
                       ),
                     ),

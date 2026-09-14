@@ -14,10 +14,7 @@ class PrivacyCenterScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Privacy Center',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
@@ -61,7 +58,8 @@ class PrivacyCenterScreen extends StatelessWidget {
                     icon: Icons.shield_outlined,
                     iconColor: Colors.teal,
                     title: 'Account safety',
-                    description: 'Default settings help create safe experiences.',
+                    description:
+                        'Default settings help create safe experiences.',
                   ),
                 ),
               ],

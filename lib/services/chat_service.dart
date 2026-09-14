@@ -10,16 +10,12 @@ import 'api_service.dart';
 class ChatService {
   /// Fetch all users
   Future<List<UserModel>> getUsers() async {
-    final response = await http.get(
-      Uri.parse("${ApiService.baseUrl}/users"),
-    );
+    final response = await http.get(Uri.parse("${ApiService.baseUrl}/users"));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
 
-      return (data["users"] as List)
-          .map((e) => UserModel.fromJson(e))
-          .toList();
+      return (data["users"] as List).map((e) => UserModel.fromJson(e)).toList();
     }
 
     throw Exception("Failed to load users");
@@ -53,30 +49,28 @@ class ChatService {
         final comments = await getComments(i + 1);
 
         chats.add(
-  ChatModel(
-    name: "${users[i].fullName} ${users[i].username}",
-    message: comments.isNotEmpty
-        ? comments.first.body
-        : "No messages",
-    image: users[i].image,
-    time: "09:30 AM",
-    unread: 0,
-    isOnline: false,
-    isRead: true,
-  ),
-);
+          ChatModel(
+            name: "${users[i].fullName} ${users[i].username}",
+            message: comments.isNotEmpty ? comments.first.body : "No messages",
+            image: users[i].image,
+            time: "09:30 AM",
+            unread: 0,
+            isOnline: false,
+            isRead: true,
+          ),
+        );
       } catch (_) {
         chats.add(
-  ChatModel(
-    name: "${users[i].fullName} ${users[i].username}",
-    message: "No messages",
-    image: users[i].image,
-    time: "09:30 AM",
-    unread: 0,
-    isOnline: false,
-    isRead: false,
-  ),
-);
+          ChatModel(
+            name: "${users[i].fullName} ${users[i].username}",
+            message: "No messages",
+            image: users[i].image,
+            time: "09:30 AM",
+            unread: 0,
+            isOnline: false,
+            isRead: false,
+          ),
+        );
       }
     }
 

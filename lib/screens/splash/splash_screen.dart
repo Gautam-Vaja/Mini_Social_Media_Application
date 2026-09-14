@@ -76,7 +76,9 @@ class _SplashScreenState extends State<SplashScreen>
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF0F1016) : const Color(0xFFF9FAFC),
+      backgroundColor: isDark
+          ? const Color(0xFF0F1016)
+          : const Color(0xFFF9FAFC),
       body: Stack(
         children: [
           // Background subtle ambient gradients
@@ -88,7 +90,9 @@ class _SplashScreenState extends State<SplashScreen>
               height: 300,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFFD62976).withValues(alpha: isDark ? 0.18 : 0.08),
+                color: const Color(
+                  0xFFD62976,
+                ).withValues(alpha: isDark ? 0.18 : 0.08),
               ),
             ),
           ),
@@ -100,7 +104,9 @@ class _SplashScreenState extends State<SplashScreen>
               height: 260,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF4F5BD5).withValues(alpha: isDark ? 0.18 : 0.08),
+                color: const Color(
+                  0xFF4F5BD5,
+                ).withValues(alpha: isDark ? 0.18 : 0.08),
               ),
             ),
           ),
@@ -125,13 +131,17 @@ class _SplashScreenState extends State<SplashScreen>
                             borderRadius: BorderRadius.circular(28),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFFD62976).withValues(alpha: 0.35),
+                                color: const Color(
+                                  0xFFD62976,
+                                ).withValues(alpha: 0.35),
                                 blurRadius: 32,
                                 spreadRadius: 4,
                                 offset: const Offset(0, 10),
                               ),
                               BoxShadow(
-                                color: const Color(0xFF4F5BD5).withValues(alpha: 0.25),
+                                color: const Color(
+                                  0xFF4F5BD5,
+                                ).withValues(alpha: 0.25),
                                 blurRadius: 24,
                                 spreadRadius: 2,
                                 offset: const Offset(0, -4),
